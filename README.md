@@ -12,9 +12,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 * [Axios](https://github.com/axios/axios)
 * [Prop-Types](https://github.com/facebook/prop-types)
 
-============================
     
-### Folder Structure
+## Folder Structure
 
     .
      ├──  SRC
