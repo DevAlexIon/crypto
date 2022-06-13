@@ -1,14 +1,39 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
+import { getAllCoinsList } from "../services/api/coins";
 
 const AddCoin = () => {
   const [coin, setCoin] = useState("");
   const [coins, setCoins] = useState([]);
+  const [allCoinsList, setAllCoinsList] = useState([]);
+  const [autoCompleteItems, setAutoCompleteItems] = useState([]);
+  const [errMsg, setErrMsg] = useState(null);
+
+  useEffect(() => {
+    getAllCoinsList().then((tickers) => {
+      setAllCoinsList(tickers);
+    });
+
+    return () => {
+      console.log("Unmount");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (coin.length > 0) {
+      const filteredCoins = allCoinsList
+        .filter((ticker) => ticker.toLowerCase().startsWith(coin.toLowerCase()))
+        .slice(0, 4);
+
+      setAutoCompleteItems(filteredCoins);
+    }
+  }, [coin, allCoinsList]);
 
   useEffect(() => {
     const temp = localStorage.getItem("coins");
     const loadedCoins = JSON.parse(temp);
 
-    loadedCoins && setCoins(loadedCoins);
+    if (loadedCoins) setCoins(loadedCoins);
   }, []);
 
   const addCoin = (e) => {
@@ -58,23 +83,25 @@ const AddCoin = () => {
                 placeholder="For example DOGE"
               />
             </div>
-            <div className="flex bg-white p-2 rounded-md shadow-md flex-wrap">
-              <span className="inline-flex items-center px-2 m-1 rounded-md text-xs font-medium bg-gray-300 text-gray-800 cursor-pointer">
-                BTC
-              </span>
-              <span className="inline-flex items-center px-2 m-1 rounded-md text-xs font-medium bg-gray-300 text-gray-800 cursor-pointer">
-                DOGE
-              </span>
-              <span className="inline-flex items-center px-2 m-1 rounded-md text-xs font-medium bg-gray-300 text-gray-800 cursor-pointer">
-                BCH
-              </span>
-              <span className="inline-flex items-center px-2 m-1 rounded-md text-xs font-medium bg-gray-300 text-gray-800 cursor-pointer">
-                CHD
-              </span>
-            </div>
-            <div className={`text-sm text-red-600 mt-2`}>
-              This ticker has already been added.
-            </div>
+
+            {!!autoCompleteItems.length && (
+              <div className="flex bg-white shadow-md p-1 rounded-md  flex-wrap">
+                {autoCompleteItems.map((autoCompleteItem, idx) => (
+                  <span
+                    key={autoCompleteItem + idx}
+                    onClick={() => setCoin(autoCompleteItem)}
+                    className="inline-flex items-center px-2 m-1 rounded-md text-xs font-medium bg-gray-300 text-gray-800 cursor-pointer"
+                  >
+                    {autoCompleteItem}
+                  </span>
+                ))}
+              </div>
+            )}
+            {errMsg && (
+              <div className="text-sm text-red-600">
+                This ticker already exists
+              </div>
+            )}
           </div>
         </div>
         <button
