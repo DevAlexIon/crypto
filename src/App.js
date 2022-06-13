@@ -1,5 +1,4 @@
-import AddCoin from "./components/AddCoin";
-import CoinGraph from "./components/CoinGraph";
+import { AddCoin, CoinGraph } from "./components";
 
 function App() {
   const loading = false;
