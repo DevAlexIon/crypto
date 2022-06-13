@@ -12,16 +12,50 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 * [Axios](https://github.com/axios/axios)
 * [Prop-Types](https://github.com/facebook/prop-types)
 
-### A typical top-level directory layout
+    
+### Folder Structure
 
     .
-    ├── build                   # Compiled files (alternatively `dist`)
-    ├── docs                    # Documentation files (alternatively `doc`)
-    ├── src                     # Source files (alternatively `lib` or `app`)
-    ├── test                    # Automated tests (alternatively `spec` or `tests`)
-    ├── tools                   # Tools and utilities
-    ├── LICENSE
-    └── README.md
+     ├──  SRC
+     ├── public
+     │ ├── index.html
+     ├── src 
+     │ ├── components
+     │    ├── AddCoin.jsx
+     │    ├── CoinGraph.jsx
+     │    └── index.js
+     │ ├── services
+     │    ├── api
+     │    └── coins.js
+     │ ├── App.js
+     │ ├── index.css
+     │ ├── index.js
+     ├── postcss.config.js
+     ├── tailwind.config.js
+     └── README.md
 
-> Use short lowercase names at least for the top-level files and folders except
-> `LICENSE`, `README.md`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
