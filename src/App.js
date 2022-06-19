@@ -1,4 +1,4 @@
-import { AddCoin, CoinGraph } from "./components";
+import { AddCoin, CoinGraph, Login } from "./components";
 
 function App() {
   const loading = false;
@@ -32,6 +32,8 @@ function App() {
         )}
 
         <div className="container">
+          <Login />
+
           <AddCoin />
 
           <hr className="w-full border-t border-gray-600 my-4" />
@@ -39,7 +41,9 @@ function App() {
           <CoinGraph />
         </div>
       </div>
+      
     </div>
+    
   );
 }
 
